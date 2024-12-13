@@ -177,7 +177,6 @@ function handleRoute(path) {
   container.innerHTML = '';
   path = path.replace('.html', '')
   path = path.replace('index', '')
-  path = location.href.replace(location.origin, '')
   if (path.endsWith('/')) {
     path = path.slice(0, -1);
   }
@@ -245,12 +244,20 @@ function handleFileUpload() {
 
 // JSON Input Option
 function buildJsonInputOption() {
-  const container = document.getElementById('resume-container');
-  container.innerHTML = `
+  const searchParams = new URLSearchParams(location.search);
+  const jsonText = searchParams.get('json');
+  if (jsonText) {
+    const data = JSON.parse(jsonText);
+    const builder = new ResumeBuilder();
+    builder.buildResume(data);
+  } else {
+    const container = document.getElementById('resume-container');
+    container.innerHTML = `
     <h2>Paste JSON Text</h2>
     <textarea id="jsonText" rows="10" cols="50"></textarea>
     <button onclick="handleJsonText()">Submit</button>
-  `;
+    `;
+  }
 }
 
 function handleJsonText() {
