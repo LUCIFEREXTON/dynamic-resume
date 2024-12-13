@@ -181,15 +181,15 @@ function handleRoute(path) {
   if (path.endsWith('/')) {
     path = path.slice(0, -1);
   }
-  if (path === '') {
+  if (path === '/dynamic-resume') {
     buildResumeFromJsonFile();
-  } else if (path === '/generate') {
+  } else if (path === '/dynamic-resume/generate') {
     buildGenerateOptions();
-  } else if (path === '/generate/file') {
+  } else if (path === '/dynamic-resume/generate/file') {
     buildFileUploadOption();
-  } else if (path === '/generate/json') {
+  } else if (path === '/dynamic-resume/generate/json') {
     buildJsonInputOption();
-  } else if (path === '/generate/form') {
+  } else if (path === '/dynamic-resume/generate/form') {
     buildFormOption();
   }
 }
@@ -211,9 +211,9 @@ function buildGenerateOptions() {
   const container = document.getElementById('resume-container');
   container.innerHTML = `
     <h2>Select Option to Generate Resume</h2>
-    <label><input type="radio" name="option" value="file" onclick="navigateTo('/generate/file')"> JSON File</label>
-    <label><input type="radio" name="option" value="json" onclick="navigateTo('/generate/json')"> JSON Text</label>
-    <label><input type="radio" name="option" value="form" onclick="navigateTo('/generate/form')"> Form</label>
+    <label><input type="radio" name="option" value="file" onclick="navigateTo('/dynamic-resume/generate/file')"> JSON File</label>
+    <label><input type="radio" name="option" value="json" onclick="navigateTo('/dynamic-resume/generate/json')"> JSON Text</label>
+    <label><input type="radio" name="option" value="form" onclick="navigateTo('/dynamic-resume/generate/form')"> Form</label>
   `;
 }
 
