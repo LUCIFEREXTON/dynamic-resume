@@ -1,0 +1,185 @@
+:root {
+  --primary-color: #0b57d0;
+  --secondary-color: #333;
+  --light-color: #efefef;
+  --dark-color: #424242;
+}
+
+html {
+  background-color: var(--light-color);;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Restrict the size to A4 */
+body {
+  width: 210mm;
+  /* A4 width */
+  height: 297mm;
+  /* A4 height */
+  margin: 0 auto;
+  /* Center the content */
+  padding: 10mm;
+  /* Add padding for a neat layout */
+  box-sizing: border-box;
+  background: aliceblue;
+}
+
+/* Ensure the content doesn't overflow */
+main {
+  max-height: calc(297mm - 20mm);
+  /* Subtract padding */
+  overflow: hidden;
+  /* Hide any overflowing content */
+}
+
+.primary-color {
+  color: var(--primary-color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-bottom: 10px;
+  border-bottom: 4px double white;
+  margin-bottom: 10px;
+}
+
+header div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header #name {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+header #position {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+header #contact {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+
+header #contact .item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px;
+  border-bottom: 1px dotted var(--primary-color);
+}
+
+header #contact .item span {
+  text-decoration: none;
+  color: var(--secondary-color);;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: auto 40%;
+  gap: 30px;
+}
+
+#container section h3 {
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  padding-bottom: 1px;
+  border-bottom: 2px double var(--secondary-color);;
+}
+
+#container section .body {
+  font-size: 12px;
+  text-align: justify;
+  line-height: 1.5;
+  color: var(--secondary-color);;
+  margin-block: 8px;
+}
+
+#container section#experience .body,
+#container section#education .body {
+  margin-bottom: 20px;
+}
+
+#container section#experience .body>.position,
+#container section#education .body>.degree {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+#container section#experience .body>.company,
+#container section#education .body>.institute {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: start;
+}
+
+#container section#experience .body>.extra,
+#container section#experience .body>.extra .item,
+#container section#education .body>.extra {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-style: italic;
+}
+
+#container section#education .body>.extra,
+#container section#experience .body>.extra .item {
+  gap: 5px
+}
+
+#container section#experience .body>.extra i,
+#container section#education .body>.extra i {
+  font-size: 10px;
+}
+
+#container section#experience .body div.contribution,
+#container section#education .body div.contribution {
+  margin-top: 15px;
+}
+
+#container section#experience .body div.contribution .title,
+#container section#education .body div.contribution .title {
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+  font-size: 14px;
+  text-align: start;
+}
+
+#container section#experience .body div.contribution .highlights ul,
+#container section#education .body div.contribution .highlights ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#container section#skills .body {
+  display: grid;
+  grid-template-columns: 28mm auto;
+  gap: 6px;
+}
+
+#container section#skills .body span:nth-child(even) {
+  text-align: justify;
+}
+
+#container section#achievements .body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#container section#achievements .body .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
