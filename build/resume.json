@@ -1,7 +1,10 @@
 {
   "metadata": {
     "primaryColor": "#0b57d0",
-    "backgroundColor": "#efefef"
+    "textPrimaryColor": "#333333",
+    "textSecondaryColor": "#00000",
+    "resumeBackgroundColor": "#f0f8ff",
+    "borderColor": "#ffffff"
   },
   "header": {
     "name": "UTKARSH GUPTA",
@@ -20,7 +23,7 @@
         "link": "mailto:gupta13utkarsh@gmail.com"
       },
       {
-        "type": "linkedin",
+        "type": "url",
         "value": "linkedin.com/in/utkarsh-gupta-1606a3137",
         "icon": "bi-linkedin",
         "link": "https://www.linkedin.com/in/utkarsh-gupta-1606a3137"
@@ -43,23 +46,22 @@
             "contributions": [
               {
                 "title": "AI-Powered Development Assistance Application",
-                "points": [
+                "highlights": [
                   "Spearheaded the full-stack development of <b>'Amoeba'</b>, an AI-powered internal web application that streamlined software engineering processes, leveraging <b>Ruby on Rails</b>, <b>React</b>, <b>Redux</b>, <b>MySQL</b>, and <b>Material UI</b>.",
-"Architected and delivered a robust <b>multi-tenant system</b> with <b>RESTful APIs</b>, ensuring scalable performance for over <b>100 concurrent users</b>.",
-"Developed and released an open-source <b>Ruby gem library</b>, enabling seamless backend integration, feature extension, and automated script generation for AI-driven projects.",
-"Revamped the company dashboard by independently gathering requirements, implementing backend logic, APIs, and crafting a modern, responsive frontend.",
-"Optimized deployments for <b>Amoeba</b> and sandbox environments using <b>Nginx</b>, automating sandbox creation to enhance developer workflows and cut deployment time by <b>50%</b>."
+                  "Architected and delivered a robust <b>multi-tenant system</b> with <b>RESTful APIs</b>, ensuring scalable performance for over <b>100 concurrent users</b>.",
+                  "Developed and released an open-source <b>Ruby gem library</b>, enabling seamless backend integration, feature extension, and automated script generation for AI-driven projects.",
+                  "Revamped the company dashboard by independently gathering requirements, implementing backend logic, APIs, and crafting a modern, responsive frontend.",
+                  "Optimized deployments for <b>Amoeba</b> and sandbox environments using <b>Nginx</b>, automating sandbox creation to enhance developer workflows and cut deployment time by <b>50%</b>."
                 ]
               },
               {
                 "title": "Company Dashboard Revamp",
-                "points": [
+                "highlights": [
                   "Spearheaded the <b>redesign and modernization</b> of the company’s dashboard, delivering a more intuitive and user-friendly experience",
                   "Streamlined error and success message handling, API calling, <b>Error Boundaries</b>, achieving a <b>40%</b> reduction in site-wide failures and improving reliability",
                   "Upgraded the frontend by migrating from <b>Bootstrap 2017</b> to <b>Material UI</b>, resulting in a <b>25%</b> increase in user engagement through a sleek, modern interface",
                   "Enhanced application responsiveness by optimizing frontend performance with <b>Redux caching strategies</b>, cutting API re-fetch rates and boosting efficiency by <b>30%</b>"
                 ]
-
               }
             ]
           },
@@ -74,7 +76,7 @@
             "contributions": [
               {
                 "title": "Developed a complete responsive MERN Stack site",
-                "points": [
+                "highlights": [
                   "Tackled new technologies like <b>Number Authentication</b> during a challenging internship",
                   "Integrated the <b>Razorpay Payment Gateway</b> for secure transactions",
                   "Built <b>real-time product availability</b> with <b>Socket.IO</b>, for efficiency"
