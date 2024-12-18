@@ -4,21 +4,26 @@ import PropTypes from "prop-types";
 import { get, map } from 'lodash';
 
 export const RenderContacts = ({ contact }) => {
+  // const type = contact?.type?.toLowerCase();
+  const getType = (type) => {
+    return type?.toLowerCase();
+  };
+
   const renderContactHref = (contact) => {
-    if (contact?.type === 'phone') {
+    if (getType(contact?.type) === 'phone') {
       return `tel:${contact?.value}`;
     }
-    if (contact?.type === 'email') {
+    if (getType(contact?.type) === 'email') {
       return `mailto:${contact?.value}`;
     }
-    if (contact?.type === 'url') {
+    if (getType(contact?.type) === 'url') {
       return contact?.value;
     }
     return '#';
   };
 
   const renderIcon = (contact) => {
-    return contact?.icon || (contact?.type === 'phone' ? 'bi-telephone-fill' : (contact?.type === 'email' ? 'bi-envelope-fill' : 'link-45deg'));
+    return contact?.icon || (getType(contact?.type) === 'phone' ? 'bi-telephone-fill' : (getType(contact?.type) === 'email' ? 'bi-envelope-fill' : 'link-45deg'));
   };
 
   return contact?.map((contact) => (
@@ -38,7 +43,7 @@ export const RenderExperience = ({ experienceSection }) => {
       <div className="title">{contribution.title}</div>
       <div className="highlights">
         <ul>
-          {contribution?.highlights?.map((highlight, index) => {
+          {contribution.highlights?.map((highlight, index) => {
             return <li
               key={index}
               dangerouslySetInnerHTML={{ __html: DomPurify.sanitize(highlight || '') }}
@@ -51,7 +56,7 @@ export const RenderExperience = ({ experienceSection }) => {
 
   return <section id="experience">
     <h3>EXPERIENCE</h3>
-    {map(experienceSection?.items, (experience) => (<div className="body">
+    {map(experienceSection, (experience) => (<div className="body">
       <div className="position">{experience.position}</div>
       <div className="company primary-color">{experience.company}</div>
       {(
@@ -68,7 +73,7 @@ export const RenderExperience = ({ experienceSection }) => {
           <span>{experience.duration?.start} - {experience.duration?.end || 'Present'}</span>
         </div> : null}
       </div> : null}
-      {renderContributions(experience.contributions)}
+      {renderContributions(experience.contributions || [])}
     </div>))}
   </section>
 }
@@ -76,7 +81,7 @@ export const RenderExperience = ({ experienceSection }) => {
 export const RenderSummary = ({ summarySection }) => {
   return <section id="summary">
     <h3>SUMMARY</h3>
-    <p className="body" dangerouslySetInnerHTML={{ __html: DomPurify.sanitize(summarySection?.content || '') }} />
+    <p className="body" dangerouslySetInnerHTML={{ __html: DomPurify.sanitize(summarySection || '') }} />
   </section>
 }
 
@@ -84,7 +89,7 @@ export const RenderAchievements = ({ achievementsSection }) => {
   return <section id="achievements">
     <h3>KEY ACHIEVEMENTS</h3>
     <div className="body">
-      {map(achievementsSection?.items, (achievement) => (
+      {map(achievementsSection, (achievement) => (
         <div className="item">
           <i className="bi bi-lightning-charge-fill primary-color"></i>
           <span dangerouslySetInnerHTML={{ __html: DomPurify.sanitize(achievement || '') }} />
@@ -98,10 +103,10 @@ export const RenderSkills = ({ skillsSection }) => {
   return <section id="skills">
     <h3>SKILLS</h3>
     <div className="body">
-      {map(skillsSection?.categories, (skill) => (
+      {map(skillsSection, (skill) => (
         <>
           <span className="primary-color">
-            <i className={`bi bi-${skill.icon}`}></i>
+            <i className={`bi ${skill.icon}`} style={{marginRight: '4px'}}></i>
             {skill.label}:
           </span>
           <span>{skill.skills}</span>
@@ -115,7 +120,7 @@ export const RenderEducation = ({ educationSection }) => {
   return <section id="education">
     <h3>EDUCATION</h3>
 
-    {map(educationSection?.items, (education) => (
+    {map(educationSection, (education) => (
       <div className="body">
         <div className="degree">{education.degree}</div>
         <div className="institute primary-color">{education.institute}</div>

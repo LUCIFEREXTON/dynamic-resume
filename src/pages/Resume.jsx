@@ -7,22 +7,22 @@ import { RenderAchievements, RenderContacts, RenderEducation, RenderExperience, 
 export default function Resume({ resumeData }) {
   const [resume, setResume] = useState(null);
 
-  const renderSections = (sections) => map(sections, (section) => {
-    switch (section.type) {
+  const renderSections = (sections) => map(sections?.order, (type) => {
+    switch (type) {
       case 'experience':
-        return <RenderExperience key={section.type} experienceSection={section} />;
+        return <RenderExperience key={type} experienceSection={sections.data[type]} />;
       case 'summary':
-        return <RenderSummary key={section.type} summarySection={section} />;
+        return <RenderSummary key={type} summarySection={sections.data[type]} />;
       case 'achievements':
-        return <RenderAchievements key={section.type} achievementsSection={section} />;
+        return <RenderAchievements key={type} achievementsSection={sections.data[type]} />;
       case 'skills':
-        return <RenderSkills key={section.type} skillsSection={section} />;
+        return <RenderSkills key={type} skillsSection={sections.data[type]} />;
       case 'education':
-        return <RenderEducation key={section.type} educationSection={section} />;
+        return <RenderEducation key={type} educationSection={sections.data[type]} />;
       default:
         return null;
     }
-  })
+  });
 
   const initiateCssVariables = (metaData) => {
     const root = document.documentElement;

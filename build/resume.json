@@ -31,10 +31,12 @@
     ]
   },
   "sections": {
-    "leftColumn": [
-      {
-        "type": "experience",
-        "items": [
+    "leftColumn": {
+      "order": [
+        "experience"
+      ],
+      "data": {
+        "experience": [
           {
             "position": "SDE 1",
             "company": "BlogVault",
@@ -86,23 +88,22 @@
           }
         ]
       }
-    ],
-    "rightColumn": [
-      {
-        "type": "summary",
-        "content": "<em>Innovative and results-driven Software Engineer</em> with over <em>4 years of experience</em> in <em>full-stack development</em>, <em>API integrations</em>, and <em>UI/UX enhancements</em>. Demonstrated expertise in leading <em>complex projects</em>, optimizing <em>system architectures</em>, and delivering <em>scalable, user-centric applications</em>. Adept at leveraging <em>modern technologies</em> such as <em>React</em>, <em>Redux</em>, <em>Ruby on Rails</em>, and <em>AI integrations</em> to drive efficiency, enhance user experiences, and support business growth."
-      },
-      {
-        "type": "achievements",
-        "items": [
+    },
+    "rightColumn": {
+      "order": [
+        "summary",
+        "achievements",
+        "skills",
+        "education"
+      ],
+      "data": {
+        "summary": "<em>Innovative and results-driven Software Engineer</em> with over <em>4 years of experience</em> in <em>full-stack development</em>, <em>API integrations</em>, and <em>UI/UX enhancements</em>. Demonstrated expertise in leading <em>complex projects</em>, optimizing <em>system architectures</em>, and delivering <em>scalable, user-centric applications</em>. Adept at leveraging <em>modern technologies</em> such as <em>React</em>, <em>Redux</em>, <em>Ruby on Rails</em>, and <em>AI integrations</em> to drive efficiency, enhance user experiences, and support business growth.",
+        "achievements": [
           "<b>Reduced ticket resolution times</b> by 25% across all platforms",
           "<b>Increased dashboard usability and engagement</b> by 40% due to architectural improvements",
           "Designed a <b>highly scalable AI platform</b> adopted by 70% of internal engineering teams within 3 months"
-        ]
-      },
-      {
-        "type": "skills",
-        "categories": [
+        ],
+        "skills": [
           {
             "label": "Frontend",
             "icon": "bi-layout-wtf",
@@ -123,11 +124,8 @@
             "icon": "bi-tools",
             "skills": "Agile, Scrum, Waterfall, TDD, BDD"
           }
-        ]
-      },
-      {
-        "type": "education",
-        "items": [
+        ],
+        "education": [
           {
             "degree": "B.Tech (CSE)",
             "institution": "Jaypee Institute of Information Technology",
@@ -138,6 +136,6 @@
           }
         ]
       }
-    ]
+    }
   }
 }

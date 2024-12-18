@@ -1,0 +1,440 @@
+{
+  "name": "Resume JSON",
+  "description": "A json output which can be read by my automated system to generate a resume PDF",
+  "inputs": [
+    {
+      "name": "metadata",
+      "type": "object",
+      "description": "includes details like color of text in resume and background",
+      "properties": [
+        {
+          "name": "primaryColor",
+          "type": "string",
+          "description": "color in either rgba, rgb, hex, name\npreferred hex"
+        },
+        {
+          "name": "textPrimaryColor",
+          "type": "string",
+          "description": "color in either rgba, rgb, hex, name\npreferred hex",
+          "enum": [
+            "color in either rgba",
+            "rgb",
+            "hex",
+            "name\npreferred hex"
+          ]
+        },
+        {
+          "name": "textSecondaryColor",
+          "type": "string",
+          "description": "color in either rgba, rgb, hex, name\npreferred hex"
+        },
+        {
+          "name": "resumeBackgroundColor",
+          "type": "string",
+          "description": "color in either rgba, rgb, hex, name\npreferred hex"
+        },
+        {
+          "name": "borderColor",
+          "type": "string",
+          "description": "color in either rgba, rgb, hex, name\npreferred hex"
+        }
+      ]
+    },
+    {
+      "name": "header",
+      "type": "object",
+      "description": "information of the resume that will come at the top of resume",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the person for which resume is getting made"
+        },
+        {
+          "name": "position",
+          "type": "string"
+        },
+        {
+          "name": "contact",
+          "type": "array",
+          "item": {
+            "name": "contact_detail",
+            "type": "object",
+            "properties": [
+              {
+                "name": "type",
+                "type": "string",
+                "enum": [
+                  "phone",
+                  "email",
+                  "url"
+                ],
+                "required": true
+              },
+              {
+                "name": "value",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "icon",
+                "type": "string",
+                "description": "absolutely necessary only if the type is \"url\""
+              },
+              {
+                "name": "link",
+                "type": "string",
+                "description": "if type is url then this will be href for the anchor which rendered the value"
+              }
+            ],
+            "description": ""
+          }
+        }
+      ],
+      "required": true
+    },
+    {
+      "name": "sections",
+      "type": "object",
+      "description": "this will have two different sections in it, leftColumn and rightColumn and same type of sections will be there in both, based on the content size must divide the sections (education, achievements, skills, experience, summary) in two columns the columns are divided 6:4 ratio so that the left column will have 60% width and right column will have 40% width, so the section like experience should come in left column",
+      "properties": [
+        {
+          "name": "leftColumn",
+          "type": "object",
+          "properties": [
+            {
+              "name": "order",
+              "type": "array",
+              "item": {
+                "name": "section",
+                "type": "string",
+                "enum": [
+                  "education",
+                  "achievements",
+                  "skills",
+                  "experience",
+                  "summary"
+                ]
+              }
+            },
+            {
+              "name": "data",
+              "type": "object",
+              "properties": [
+                {
+                  "name": "education",
+                  "type": "array",
+                  "item": {
+                    "name": "education_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "degree",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "institution",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "duration",
+                        "type": "object",
+                        "properties": [
+                          {
+                            "name": "start",
+                            "type": "string",
+                            "required": true
+                          },
+                          {
+                            "name": "end",
+                            "type": "string",
+                            "required": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "experience",
+                  "type": "array",
+                  "item": {
+                    "name": "experience_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "position",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "company",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "duration",
+                        "type": "object",
+                        "required": true,
+                        "properties": [
+                          {
+                            "name": "start",
+                            "type": "string",
+                            "required": true
+                          },
+                          {
+                            "name": "end",
+                            "type": "string",
+                            "required": true
+                          }
+                        ]
+                      },
+                      {
+                        "name": "contributions",
+                        "type": "array",
+                        "required": true,
+                        "item": {
+                          "name": "contribution",
+                          "description": "contribution with title and point wise highlights of the contribution this is the place where we need to put a lot of efforts in emphasizing the contribuation as per best practices in order to make resume",
+                          "type": "object",
+                          "properties": [
+                            {
+                              "name": "title",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "highlights",
+                              "type": "array",
+                              "required": true,
+                              "item": {
+                                "name": "highlight",
+                                "description": "A html supported small point wise description",
+                                "type": "string"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "skills",
+                  "type": "array",
+                  "item": {
+                    "name": "skill_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "label",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "icon",
+                        "description": "class name for bootstrap icon like 'bi-layout-wtf'",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "skills",
+                        "description": "a list of skills related to label with a separator like 'HTML, CSS'",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "summary",
+                  "type": "string",
+                  "description": "A html supported summary of the person based on the Job description provided to you"
+                },
+                {
+                  "name": "achievements",
+                  "type": "array",
+                  "item": {
+                    "name": "achievement",
+                    "description": "A html supported achievment in point of the person based on the Job description provided to you",
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightColumn",
+          "type": "object",
+          "properties": [
+            {
+              "name": "order",
+              "type": "array",
+              "item": {
+                "name": "section",
+                "type": "string",
+                "enum": [
+                  "education",
+                  "achievements",
+                  "skills",
+                  "experience",
+                  "summary"
+                ]
+              }
+            },
+            {
+              "name": "data",
+              "type": "object",
+              "properties": [
+                {
+                  "name": "education",
+                  "type": "array",
+                  "item": {
+                    "name": "education_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "degree",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "institution",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "duration",
+                        "type": "object",
+                        "properties": [
+                          {
+                            "name": "start",
+                            "type": "string",
+                            "required": true
+                          },
+                          {
+                            "name": "end",
+                            "type": "string",
+                            "required": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "experience",
+                  "type": "array",
+                  "item": {
+                    "name": "experience_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "position",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "company",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "duration",
+                        "type": "object",
+                        "required": true,
+                        "properties": [
+                          {
+                            "name": "start",
+                            "type": "string",
+                            "required": true
+                          },
+                          {
+                            "name": "end",
+                            "type": "string",
+                            "required": true
+                          }
+                        ]
+                      },
+                      {
+                        "name": "contributions",
+                        "type": "array",
+                        "required": true,
+                        "item": {
+                          "name": "contribution",
+                          "description": "contribution with title and point wise highlights of the contribution this is the place where we need to put a lot of efforts in emphasizing the contribuation as per best practices in order to make resume",
+                          "type": "object",
+                          "properties": [
+                            {
+                              "name": "title",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "highlights",
+                              "type": "array",
+                              "required": true,
+                              "item": {
+                                "name": "highlight",
+                                "description": "A html supported small point wise description",
+                                "type": "string"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "skills",
+                  "type": "array",
+                  "item": {
+                    "name": "skill_detail",
+                    "type": "object",
+                    "properties": [
+                      {
+                        "name": "label",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "icon",
+                        "description": "class name for bootstrap icon like 'bi-layout-wtf'",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "skills",
+                        "description": "a list of skills related to label with a separator like 'HTML, CSS'",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "summary",
+                  "type": "string",
+                  "description": "A html supported summary of the person based on the Job description provided to you"
+                },
+                {
+                  "name": "achievements",
+                  "type": "array",
+                  "item": {
+                    "name": "achievement",
+                    "description": "A html supported achievment in point of the person based on the Job description provided to you",
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { get, map, set } from 'lodash';
+import { get, map, omit, set } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 import Header from './Header';
@@ -14,65 +14,116 @@ const InputsForm = ({ jsonState, onJsonChange }) => {
     onJsonChange((prevState) => ({...set(prevState, ['header'], { ...prevState.header, [field]: value })}));
   }, [onJsonChange]);
 
-  const handleColumnChange = useCallback((column, index, section) => {
-    onJsonChange((prevState) => {
-      const sections = [...get(prevState, ['sections', column], [])];
-      return {...set(prevState, ['sections', column], set(sections, (index || 0), section))};
-    });
+  const handleColumnChange = useCallback((column, oldType, newtype, section) => {
+    let sections = { ...get(jsonState, ['sections', column, 'data'], {}) };
+    if (oldType && oldType !== newtype) {
+      sections = omit(sections, oldType);
+    }
+    sections[newtype] = section;
+    const order = Object.keys(sections);
+    onJsonChange((prevState) => ({
+      ...set(prevState, ['sections', column], {
+        data: sections,
+        order
+      })
+    }));
   }, [onJsonChange]);
 
-  const handleRemoveSection = useCallback((column, index) => {
-    onJsonChange((prevState) => ({...set(prevState, ['sections', column], get(prevState, ['sections', column], []).filter((_, i) => i !== index))}));
+  const handleRemoveSection = useCallback((column, type) => {
+    onJsonChange((prevState) => {
+      let sections = { ...get(prevState, ['sections', column, 'data'], {}) };
+      sections = omit(sections, type);
+      const order = Object.keys(sections);
+      return {
+        ...set(prevState, ['sections', column], {
+          data: sections,
+          order
+        })
+      };
+    })
   }, [onJsonChange]);
 
   return (
-    <div>
-      <MetaData
-        parent='metadata'
-        metadata={jsonState.metadata}
-        handleMetadataChange={handleMetadataChange}
-      />
-      <Header
-        parent='header'
-        header={jsonState.header}
-        onHeaderChange={handleHeaderChange}
-      />
-      <div className="section" id="left-column">
-        <h3 className="item-title">Left Column</h3>
-        <div className='content-group'>
-          {map(jsonState.sections?.leftColumn, (section, index) => <div key={`leftColumn-${index}`}>
-            <button className='remove-btn' onClick={() => handleRemoveSection('leftColumn', index)}>Remove</button>
-            <Section
-              section={section}
-              onSectionChange={section => handleColumnChange('leftColumn', index, section)}
-              parentName={`sections.leftColumn[${index}]`}
-            />
-          </div>)}
-          <Section
-            key={`leftColumn-${jsonState.sections?.leftColumn?.length}`}
-            section={{ type: '' }}
-            onSectionChange={section => handleColumnChange('leftColumn', jsonState.sections?.leftColumn?.length, section)}
-            parentName={`sections.leftColumn[${jsonState.sections?.leftColumn?.length}]`}
-          />
-        </div>
+    <div className="resume-form-container">
+      <div className="resume-form-section">
+        <MetaData
+          parent='metadata'
+          metadata={jsonState.metadata}
+          handleMetadataChange={handleMetadataChange}
+        />
       </div>
-      <div className="section" id="right-column">
-        <h3 className="item-title">Right Column</h3>
-        <div className='content-group'>
-          {map(jsonState.sections?.rightColumn, (section, index) => <div key={`rightColumn-${index}`}>
-            <button className='remove-btn' onClick={() => handleRemoveSection('rightColumn', index)}>Remove</button>
-            <Section
-              section={section}
-              onSectionChange={section => handleColumnChange('rightColumn', index, section)}
-              parentName={`sections.rightColumn[${index}]`}
-            />
-          </div>)}
-          <Section
-            key={`rightColumn-${jsonState.sections?.rightColumn?.length}`}
-            section={{ type: '' }}
-            onSectionChange={section => handleColumnChange('rightColumn', jsonState.sections?.rightColumn?.length, section)}
-            parentName={`sections.rightColumn[${jsonState.sections?.rightColumn?.length}]`}
-          />
+
+      <div className="resume-form-section">
+        <Header
+          parent='header'
+          header={jsonState.header}
+          onHeaderChange={handleHeaderChange}
+        />
+      </div>
+
+      <div className="resume-columns">
+        <div className="resume-column" id="left-column">
+          <h3 className="column-title">Left Column</h3>
+          <div className='column-content'>
+            {map(jsonState.sections?.leftColumn?.order, (type) => (
+              <div className="section-wrapper" key={`leftColumn-${type}`}>
+                <button
+                  className='section-remove-btn'
+                  onClick={() => handleRemoveSection('leftColumn', type)}
+                >
+                  <span className="btn-icon">−</span>
+                  <span className="btn-text">Remove Section</span>
+                </button>
+                <Section
+                  section={jsonState.sections.leftColumn.data[type]}
+                  type={type}
+                  onSectionChange={(section, newType) => handleColumnChange('leftColumn', type, newType, section)}
+                  parentName={`sections.leftColumn.data.${type}`}
+                />
+              </div>
+            ))}
+            <div className="section-wrapper section-wrapper-new">
+              <Section
+                key={`leftColumn-new-item`}
+                section={null}
+                type=''
+                onSectionChange={(section, newType) => handleColumnChange('leftColumn', '', newType, section)}
+                parentName={`sections.leftColumn[${jsonState.sections?.leftColumn?.length}]`}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="resume-column" id="right-column">
+          <h3 className="column-title">Right Column</h3>
+          <div className='column-content'>
+            {map(jsonState.sections?.rightColumn?.order, (type) => (
+              <div className="section-wrapper" key={`rightColumn-${type}`}>
+                <button
+                  className='section-remove-btn'
+                  onClick={() => handleRemoveSection('rightColumn', type)}
+                >
+                  <span className="btn-icon">−</span>
+                  <span className="btn-text">Remove Section</span>
+                </button>
+                <Section
+                  section={jsonState.sections.rightColumn.data[type]}
+                  type={type}
+                  onSectionChange={(section, newType) => handleColumnChange('rightColumn', type, newType, section)}
+                  parentName={`sections.rightColumn.data.${type}`}
+                />
+              </div>
+            ))}
+            <div className="section-wrapper section-wrapper-new">
+              <Section
+                key={`rightColumn-new-item`}
+                section={null}
+                type=''
+                onSectionChange={(section, newType) => handleColumnChange('rightColumn', '', newType, section)}
+                parentName={`sections.rightColumn[${jsonState.sections?.rightColumn?.length}]`}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
