@@ -3,6 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 import InputsForm from './InputsForm';
 import Resume from '../Resume';
 
+const getParsedJson = (jsonString) => {
+  try {
+    return JSON.parse(jsonString);
+  } catch {
+    return false;
+  }
+};
+
 const Generate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -10,11 +18,11 @@ const Generate = () => {
 
   const [activeTab, setActiveTab] = useState(initialTab);
   const [jsonState, setJsonState] = useState('{}');
-  const [jsonForm, setJsonForm] = useState(JSON.parse(jsonState));
+  const [jsonForm, setJsonForm] = useState(getParsedJson(jsonState) || {});
 
 
   useEffect(() => {
-    setJsonForm(JSON.parse(jsonState));
+    setJsonForm(currentValue => getParsedJson(jsonState) || currentValue);
   }, [jsonState]);
 
   useEffect(() => {
