@@ -15,6 +15,23 @@
   background: #555;
 }
 
+#download-btn {
+  position: absolute;
+  top: 10px;
+  left: 222mm;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #e2f5fe;
+  color: #0073ed;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
 #maker-container {
   display: grid;
   grid-template-columns: 210mm 1fr;

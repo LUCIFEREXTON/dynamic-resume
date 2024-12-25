@@ -2,10 +2,13 @@ import axios from "axios";
 import { map } from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { RenderAchievements, RenderContacts, RenderEducation, RenderExperience, RenderSkills, RenderSummary } from "@app/helpers/resumePageHelper";
+import { RenderAchievements, RenderContacts, RenderEducation, RenderExperience, RenderSkills, RenderSummary } from "@app/shared/helpers/resumePageHelper";
+import { useLocation } from "react-router-dom";
 
 export default function Resume({ resumeData }) {
+  const location = useLocation();
   const [resume, setResume] = useState(null);
+  const [print, setPrint] = useState(false);
 
   const renderSections = (sections) => map(sections?.order, (type) => {
     switch (type) {
@@ -46,6 +49,9 @@ export default function Resume({ resumeData }) {
   useEffect(() => {
     if (resumeData) {
       setResume(resumeData);
+    } else if (location.state) {
+      setResume(location.state.json);
+      setPrint(location.state.print);
     } else {
       axios.get('resume.json')
         .then(response => {
@@ -56,6 +62,12 @@ export default function Resume({ resumeData }) {
         });
     }
   }, [resumeData]);
+
+  useEffect(() => {
+    if (print) {
+      window.print();
+    }
+  }, [print]);
 
   useEffect(() => {
     if (resume) {

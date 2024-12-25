@@ -1,4 +1,4 @@
-import Input from '@app/components/Input';
+import Input from '@app/shared/components/Input';
 import { extend, filter, get, map, set, size } from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -110,7 +110,7 @@ const Experience = ({ section, parentName, onSectionChange }) => {
           type="text"
           label="Company"
           value={experience.company || ''}
-          name={`${parentName}.items[${i}].company`}
+          name={`${parentName}[${i}].company`}
           onChange={(e) => onSectionChange(i, 'company', e.target.value)}
         />
         <Input
@@ -118,7 +118,7 @@ const Experience = ({ section, parentName, onSectionChange }) => {
           type="text"
           label="Location"
           value={experience.location || ''}
-          name={`${parentName}.items[${i}].location`}
+          name={`${parentName}[${i}].location`}
           onChange={(e) => onSectionChange(i, 'location', e.target.value)}
         />
         <Input
@@ -126,7 +126,7 @@ const Experience = ({ section, parentName, onSectionChange }) => {
           type="text"
           label="Duration Start"
           value={experience.duration?.start || ''}
-          name={`${parentName}.items[${i}].duration.start`}
+          name={`${parentName}[${i}].duration.start`}
           onChange={(e) => handleDurationChange(i, 'start', e.target.value)}
         />
         <Input
@@ -134,7 +134,7 @@ const Experience = ({ section, parentName, onSectionChange }) => {
           type="text"
           label="Duration End"
           value={experience.durationEnd || ''}
-          name={`${parentName}.items[${i}].duration.end`}
+          name={`${parentName}[${i}].duration.end`}
           onChange={(e) => handleDurationChange(i, 'end', e.target.value)}
         />
       </div>

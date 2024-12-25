@@ -1,4 +1,4 @@
-import Input from '@app/components/Input';
+import Input from '@app/shared/components/Input';
 import { extend, set } from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';

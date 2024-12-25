@@ -1,7 +1,9 @@
+import { useToast } from '@app/shared/contexts/ToastContext';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import InputsForm from './InputsForm';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Resume from '../Resume';
+import dummyResume from './dummyResume.json';
+import InputsForm from './InputsForm';
 
 const getParsedJson = (jsonString) => {
   try {
@@ -12,17 +14,25 @@ const getParsedJson = (jsonString) => {
 };
 
 const Generate = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const initialJson = location.state?.json || dummyResume;
   const [searchParams, setSearchParams] = useSearchParams();
+  const { addToast } = useToast();
 
   const initialTab = searchParams.get('tab') || 'paste-json';
 
   const [activeTab, setActiveTab] = useState(initialTab);
-  const [jsonState, setJsonState] = useState('{}');
-  const [jsonForm, setJsonForm] = useState(getParsedJson(jsonState) || {});
-
+  const [jsonState, setJsonState] = useState(JSON.stringify(initialJson, null, 2));
+  const [jsonForm, setJsonForm] = useState(initialJson);
 
   useEffect(() => {
-    setJsonForm(currentValue => getParsedJson(jsonState) || currentValue);
+    const currentValue = getParsedJson(jsonState);
+    if (currentValue) {
+      setJsonForm(currentValue);
+    } else {
+      addToast('Invalid JSON.', 'error');
+    }
   }, [jsonState]);
 
   useEffect(() => {
@@ -43,7 +53,7 @@ const Generate = () => {
           setJsonState(JSON.stringify(json, null, 2));
           setActiveTab('paste-json'); // Switch to the JSON tab
         } catch (error) {
-          alert('Invalid JSON file.');
+          addToast('Invalid JSON file.', 'error');
         }
       };
       reader.readAsText(file);
@@ -60,7 +70,18 @@ const Generate = () => {
     alert(`Form Submitted: Name: ${jsonState?.name}, Position: ${jsonState?.position}`);
   };
 
-  return (
+  const onDownloadClick = () => {
+    navigate('.', { state: { json: jsonForm }, replace: true });
+    navigate('/', { state: { json: jsonForm, print: true } });
+  }
+
+  return (<>
+    <button
+      id="download-btn"
+      onClick={onDownloadClick}
+    >
+      Print
+    </button>
     <div id="maker-container">
       <Resume resumeData={jsonForm} />
       <div id="generate-container">
@@ -121,6 +142,7 @@ const Generate = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

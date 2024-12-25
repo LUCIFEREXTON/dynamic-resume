@@ -73,6 +73,12 @@ html {
   border-bottom: 1px dotted var(--primary-color);
 }
 
+@media print {
+  #resume-container header #contact .item {
+    border-bottom: none;
+  }
+}
+
 #resume-container header #contact .item span {
   text-decoration: none;
   color: var(--text-primary-color);

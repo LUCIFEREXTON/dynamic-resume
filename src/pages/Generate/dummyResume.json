@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "primaryColor": "#0b57d0",
+    "textPrimaryColor": "#333333",
+    "textSecondaryColor": "#00000",
+    "resumeBackgroundColor": "#f0f8ff",
+    "borderColor": "#ffffff"
+  },
+  "header": {
+    "name": "Lorem Ipsum",
+    "position": "Dolor Sit Amet",
+    "contact": [
+      {
+        "type": "phone",
+        "value": "+123 456 7890",
+        "icon": "bi-telephone-fill",
+        "link": "tel:+1234567890"
+      },
+      {
+        "type": "email",
+        "value": "lorem.ipsum@example.com",
+        "icon": "bi-envelope-fill",
+        "link": "mailto:lorem.ipsum@example.com"
+      },
+      {
+        "type": "url",
+        "value": "linkedin.com/in/lorem-ipsum",
+        "icon": "bi-linkedin",
+        "link": "https://www.linkedin.com/in/lorem-ipsum"
+      }
+    ]
+  },
+  "sections": {
+    "leftColumn": {
+      "order": [
+        "experience"
+      ],
+      "data": {
+        "experience": [
+          {
+            "position": "Lorem Developer",
+            "company": "Ipsum Corp",
+            "location": "Consectetur, Adipiscing",
+            "duration": {
+              "start": "Jan 2021",
+              "end": "Present"
+            },
+            "contributions": [
+              {
+                "title": "Dolor Sit Amet Project",
+                "highlights": [
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                  "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "rightColumn": {
+      "order": [
+        "summary",
+        "achievements",
+        "skills",
+        "education"
+      ],
+      "data": {
+        "summary": "<em>Lorem ipsum dolor sit amet</em>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "achievements": [
+          "<b>Increased project efficiency</b> by 30% through innovative solutions.",
+          "Developed a <b>highly responsive web application</b> adopted by the majority of clients."
+        ],
+        "skills": [
+          {
+            "label": "Frontend",
+            "icon": "bi-layout-wtf",
+            "skills": "HTML, CSS, JavaScript, React, Bootstrap"
+          },
+          {
+            "label": "Backend",
+            "icon": "bi-hdd-rack",
+            "skills": "Node.js, Express, MongoDB, MySQL"
+          }
+        ],
+        "education": [
+          {
+            "degree": "B.Tech (Lorem Ipsum)",
+            "institution": "University of Dolor Sit",
+            "duration": {
+              "start": "Aug 2015",
+              "end": "May 2019"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
