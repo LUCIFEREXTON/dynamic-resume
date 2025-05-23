@@ -17,7 +17,7 @@ export const RenderContacts = ({ contact }) => {
       return `mailto:${contact?.value}`;
     }
     if (getType(contact?.type) === 'url') {
-      return contact?.value;
+      return contact?.link;
     }
     return '#';
   };
