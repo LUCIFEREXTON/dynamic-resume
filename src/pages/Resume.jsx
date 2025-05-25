@@ -1,5 +1,5 @@
 import axios from "axios";
-import { map } from "lodash";
+import { map, isEmpty } from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { RenderAchievements, RenderContacts, RenderEducation, RenderExperience, RenderSkills, RenderSummary } from "@app/shared/helpers/resumePageHelper";
@@ -96,12 +96,12 @@ export default function Resume({ resumeData }) {
         </div>
       </header>
       <div id="container">
-        <div id="left-section">
+        {isEmpty(resume.sections?.leftColumn) ? null : <div id="left-section">
           {renderSections(resume.sections?.leftColumn)}
-        </div>
-        <div id="right-section">
+        </div>}
+        {isEmpty(resume.sections?.rightColumn) ? null : <div id="right-section">
           {renderSections(resume.sections?.rightColumn)}
-        </div>
+        </div>}
       </div>
     </main>
   </div>;

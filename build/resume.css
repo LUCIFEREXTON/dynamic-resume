@@ -8,8 +8,6 @@
 
 html {
   background-color: #efefef;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: 0.5px;
 }
 
 /* Restrict the size to A4 */
@@ -66,6 +64,7 @@ html {
 }
 
 #resume-container header #contact .item {
+  line-height: normal;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -86,8 +85,13 @@ html {
 
 #resume-container #container {
   display: grid;
-  grid-template-columns: auto 40%;
+  grid-template-columns: 100%;
   gap: 30px;
+}
+
+/* If a second child exists, switch to two-column layout */
+#resume-container #container:has(> :nth-child(2)) {
+  grid-template-columns: auto 40%;
 }
 
 #resume-container #container section h3 {
