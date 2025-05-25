@@ -12,6 +12,8 @@ html {
 
 /* Restrict the size to A4 */
 #resume-container {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px;
   width: 210mm;
   /* A4 width */
   height: 297mm;
